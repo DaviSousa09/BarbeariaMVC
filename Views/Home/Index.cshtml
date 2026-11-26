@@ -1,0 +1,49 @@
+@model HomeViewModel
+@{
+    ViewData["Title"] = "Painel inicial";
+}
+<section class="hero">
+    <div>
+        <p class="eyebrow">GESTÃO INTELIGENTE</p>
+        <h1>Bem-vindo à <span>Barber Style</span></h1>
+        <p>Organize seus clientes, serviços, profissionais e horários em um só lugar.</p>
+        <a class="btn gold" asp-controller="Agendamentos" asp-action="Create">＋ Novo agendamento</a>
+    </div>
+    <div class="hero-mark">✂</div>
+</section>
+
+<section class="stats">
+    <article class="stat"><span>Clientes cadastrados</span><strong>@Model.TotalClientes</strong><small>Base de clientes</small></article>
+    <article class="stat"><span>Serviços disponíveis</span><strong>@Model.TotalServicos</strong><small>Tipos de atendimento</small></article>
+    <article class="stat"><span>Barbeiros</span><strong>@Model.TotalBarbeiros</strong><small>Profissionais cadastrados</small></article>
+    <article class="stat"><span>Agendamentos ativos</span><strong>@Model.TotalAgendamentos</strong><small>Com status agendado</small></article>
+</section>
+
+<section class="panel">
+    <div class="section-heading">
+        <div><p class="eyebrow">AGENDA</p><h2>Próximos atendimentos</h2></div>
+        <a class="text-link" asp-controller="Agendamentos" asp-action="Index">Ver todos →</a>
+    </div>
+    @if (!Model.ProximosAgendamentos.Any())
+    {
+        <p class="empty">Nenhum atendimento futuro cadastrado.</p>
+    }
+    else
+    {
+        <div class="table-wrap"><table>
+            <thead><tr><th>Data e hora</th><th>Cliente</th><th>Serviço</th><th>Barbeiro</th><th>Status</th></tr></thead>
+            <tbody>
+            @foreach (var item in Model.ProximosAgendamentos)
+            {
+                <tr>
+                    <td>@item.DataHora.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@(Model.Clientes.FirstOrDefault(x => x.Id == item.ClienteId)?.Nome ?? "—")</td>
+                    <td>@(Model.Servicos.FirstOrDefault(x => x.Id == item.ServicoId)?.Nome ?? "—")</td>
+                    <td>@(Model.Barbeiros.FirstOrDefault(x => x.Id == item.BarbeiroId)?.Nome ?? "—")</td>
+                    <td><span class="status">@item.Status</span></td>
+                </tr>
+            }
+            </tbody>
+        </table></div>
+    }
+</section>

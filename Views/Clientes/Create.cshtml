@@ -1,0 +1,10 @@
+@model Cliente
+@{ ViewData["Title"] = "Novo cliente"; }
+<div class="page-heading"><div><p class="eyebrow">CADASTROS</p><h1>Novo cliente</h1></div></div>
+<section class="panel form-panel"><form asp-action="Create" method="post">
+<div asp-validation-summary="ModelOnly" class="validation"></div>
+<label asp-for="Nome">Nome completo</label><input asp-for="Nome" placeholder="Ex.: João da Silva" /><span asp-validation-for="Nome" class="validation"></span>
+<label asp-for="Telefone">Telefone</label><input asp-for="Telefone" placeholder="(00) 00000-0000" /><span asp-validation-for="Telefone" class="validation"></span>
+<label asp-for="Email">E-mail (opcional)</label><input asp-for="Email" placeholder="cliente@email.com" /><span asp-validation-for="Email" class="validation"></span>
+<div class="form-actions"><button class="btn gold" type="submit">Salvar cliente</button><a class="btn secondary" asp-action="Index">Cancelar</a></div>
+</form></section>

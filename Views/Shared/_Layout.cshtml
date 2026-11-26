@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Barber Style</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" asp-controller="Home" asp-action="Index">✂ BARBER <span>STYLE</span></a>
+        <nav>
+            <a asp-controller="Home" asp-action="Index">Início</a>
+            <a asp-controller="Clientes" asp-action="Index">Clientes</a>
+            <a asp-controller="Servicos" asp-action="Index">Serviços</a>
+            <a asp-controller="Barbeiros" asp-action="Index">Barbeiros</a>
+            <a asp-controller="Agendamentos" asp-action="Index">Agendamentos</a>
+        </nav>
+    </header>
+    <main class="container">
+        @if (TempData["Sucesso"] is not null) { <div class="alert success">@TempData["Sucesso"]</div> }
+        @if (TempData["Erro"] is not null) { <div class="alert error">@TempData["Erro"]</div> }
+        @RenderBody()
+    </main>
+    <footer>BARBER STYLE • Sistema de gerenciamento de barbearia</footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

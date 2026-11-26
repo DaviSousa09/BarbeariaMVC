@@ -1,0 +1,11 @@
+@model IEnumerable<Cliente>
+@{ ViewData["Title"] = "Clientes"; }
+<div class="page-heading"><div><p class="eyebrow">CADASTROS</p><h1>Clientes</h1><p>Gerencie as pessoas atendidas pela barbearia.</p></div><a class="btn gold" asp-action="Create">＋ Novo cliente</a></div>
+<section class="panel">
+@if (!Model.Any()) { <p class="empty">Nenhum cliente cadastrado.</p> }
+else {
+<div class="table-wrap"><table><thead><tr><th>Nome</th><th>Telefone</th><th>E-mail</th><th>Ações</th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td>@item.Nome</td><td>@item.Telefone</td><td>@(item.Email ?? "—")</td><td class="actions"><a class="text-link" asp-action="Edit" asp-route-id="@item.Id">Editar</a><form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirmarExclusao('este cliente')"><button class="link-danger">Excluir</button></form></td></tr> }
+</tbody></table></div>
+}
+</section>
